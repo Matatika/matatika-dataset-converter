@@ -1,0 +1,43 @@
+version: datasets/v0.2
+source: tap-meltano
+title: Top 10 Meltano Jobs by Runs
+questions: What are my top 10 Meltano jobs by runs?
+description: |-
+  Top 10 Meltano jobs by runs.
+  
+  #meltano
+metadata: |-
+  {
+    "name": "mdj",
+    "label": "Top 10 Meltano Jobs by Runs", 
+    "related_table": {
+      "columns": [
+        {"name": "job_id", "label": "Job Id", "description": "Job Id"}
+      ],
+      "aggregates": [
+        {"name": "total_jobs", "label": "Total Runs", "description": "Total Runs"}
+      ]
+    }
+  }
+visualisation: |-
+  {"chartjs-chart": 
+    {"chartType": "bar", 
+      "options": {
+        "scales": {
+          "yAxes": [{
+            "ticks": {
+              "beginAtZero": true
+            }
+          }]
+        }
+      }
+    }
+  }
+query: |-
+  SELECT 
+    job_id "mdj.job_id"
+    , sum(total_jobs) "mdj.total_jobs"
+  FROM meltano_daily_jobs_by_job_id mdj
+  GROUP BY job_id
+  ORDER BY "mdj.total_jobs" DESC
+  LIMIT 10

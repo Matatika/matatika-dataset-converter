@@ -1,0 +1,37 @@
+version: datasets/v0.2
+source: tap-meltano
+title: Most Recent 3 Failing Meltano Jobs
+questions: What are my most recently failing Meltano jobs?
+description: |-
+  3 most recently failing Meltano jobs.
+  
+  #meltano 
+  #meltano-failing-jobs
+metadata: |-
+  {
+    "name": "mj",
+    "label": "Most Recent 3 Failing Meltano Jobs", 
+    "related_table": {
+      "columns": [
+        {"name": "job_id", "label": "Job Id", "description": "Job Id"}, 
+        {"name": "state", "label": "Job State", "description": "Job State"},
+        {"name": "payload", "label": "Error Message", "description": "Error Message"},
+        {"name": "started_at", "label": "Started At", "description": "Started At"},
+        {"name": "ended_at", "label": "Ended At", "description": "Ended At"},
+        {"name": "job_duration", "label": "Job Duration", "description": "Job Duration"}
+      ]
+    }
+  }
+visualisation: '{"google-chart": {"chartType": "Table"}}'
+query: |-
+  SELECT
+    job_id "mj.job_id"
+    , state "mj.state"
+    , payload "mj.payload"
+    , started_at "mj.started_at"
+    , ended_at "mj.ended_at"
+    , TO_CHAR(job_duration, 'HH24:MI:SS') "mj.job_duration"
+  FROM meltano_jobs mj
+  WHERE state = 'FAIL'
+  ORDER BY started_at DESC
+  LIMIT 3

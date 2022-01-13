@@ -1,0 +1,11 @@
+meltano-top-10-jobs-by-runs: |-
+  [{"mdj.job_id": "Main", "mdj.total_jobs": 1207},
+  {"mdj.job_id": "Secondary", "mdj.total_jobs": 977},
+  {"mdj.job_id": "Main-Test", "mdj.total_jobs": 418},
+  {"mdj.job_id": "Secondary-Test", "mdj.total_jobs": 222},
+  {"mdj.job_id": "General-Test", "mdj.total_jobs": 196},
+  {"mdj.job_id": "Update-Test-0.1.1", "mdj.total_jobs": 115},
+  {"mdj.job_id": "Update-Test-0.1.3", "mdj.total_jobs": 68},
+  {"mdj.job_id": "Update-Test-0.1.8", "mdj.total_jobs": 45},
+  {"mdj.job_id": "Update-Test-0.1.5", "mdj.total_jobs": 42},
+  {"mdj.job_id": "Update-Test-0.1.2", "mdj.total_jobs": 15}]
