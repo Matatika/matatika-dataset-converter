@@ -23,9 +23,10 @@ def save_converted_chartjs_chart(
     return yaml_file_name
 
 
-def create_html_chart_include_string(file_name):
-    include_string = r"{% include_relative "
-    include_string = include_string + f"{file_name}.html "
+def create_html_chart_include_string(file_name, datasource):
+    snippet_output_path = f"snippets/datasets/{datasource}/output/"
+    include_string = r"{% include "
+    include_string = include_string + f"{snippet_output_path}{file_name}.html "
     include_string = include_string + r"%}"
     return include_string
 
@@ -44,7 +45,9 @@ def create_md_snippet(dataset_dict, file_name, output_dir_path):
     mdFile.new_paragraph()
     mdFile.write(description)
     mdFile.new_paragraph()
-    include_snippet_string = create_html_chart_include_string(file_name)
+    include_snippet_string = create_html_chart_include_string(
+        file_name, dataset_dict["source"]
+    )
     mdFile.write(include_snippet_string)
     mdFile.new_paragraph()
     mdFile.write("---")
@@ -65,9 +68,14 @@ def convert_chartjs_dataset(
     rawdata_file_list_trimmed = [os.path.splitext(fn)[0] for fn in rawdata_file_list]
 
     if file_name in rawdata_file_list_trimmed:
-        imported_rawdata_file = bios.read(
-            str(rawdata_path.joinpath(file_name + ".yml"))
-        )
+        try:
+            imported_rawdata_file = bios.read(
+                str(rawdata_path.joinpath(file_name + ".yml"))
+            )
+        except:
+            imported_rawdata_file = bios.read(
+                str(rawdata_path.joinpath(file_name + ".yaml"))
+            )
         my_dataset_chart = chartjs.to_chart(
             dataset,
             json.loads(imported_rawdata_file[file_name]),
