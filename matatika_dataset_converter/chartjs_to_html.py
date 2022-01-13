@@ -24,7 +24,7 @@ def save_converted_chartjs_chart(
 
 
 def create_html_chart_include_string(file_name):
-    include_string = r"{% include "
+    include_string = r"{% include_relative "
     include_string = include_string + f"{file_name}.html "
     include_string = include_string + r"%}"
     return include_string
