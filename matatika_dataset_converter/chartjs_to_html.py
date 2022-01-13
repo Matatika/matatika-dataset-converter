@@ -78,7 +78,7 @@ def convert_chartjs_dataset(
         html_file_name = save_converted_chartjs_chart(
             plotter, my_dataset_chart, file_name, output_path
         )
-        click.secho(f"Converted {file_name}")
+        click.secho(f"Converted {file_name}", fg="green")
     except:
         click.secho(f"Error converting {file_name}", fg="red")
         return
