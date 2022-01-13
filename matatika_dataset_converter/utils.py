@@ -13,4 +13,4 @@ def clean_up_md_whitespace(file):
     with open(file + ".md", "r") as file_in:
         data = file_in.read().splitlines(True)
     with open(file + ".md", "w") as file_out:
-        file_out.writelines(data[4:])
+        file_out.writelines(data[3:])

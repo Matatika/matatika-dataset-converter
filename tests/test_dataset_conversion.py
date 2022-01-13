@@ -46,8 +46,7 @@ class TestDatasetConversion(unittest.TestCase):
         )
 
     def tearDown(self):
-        # clean_up_converted_test_files(self.test_files_path)
-        pass
+        clean_up_converted_test_files(self.test_files_path)
 
     def test_convert_chartjs_dataset(self):
         result = self.runner.invoke(

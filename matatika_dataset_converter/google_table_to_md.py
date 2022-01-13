@@ -14,7 +14,10 @@ def convert_google_table_dataset(dataset_dict, yaml_file_name, output_path):
         description = description[0].strip()
     except:
         description = dataset_dict["description"]
-    mdFile.new_header(level=1, title=dataset_dict["questions"])
+    mdFile.write("## " + dataset_dict["title"])
+    mdFile.new_paragraph()
+    mdFile.write("### " + dataset_dict["questions"])
+    mdFile.new_paragraph()
     mdFile.write(description)
     column_names = []
     my_dict = json.loads(dataset_dict["metadata"])
@@ -23,6 +26,8 @@ def convert_google_table_dataset(dataset_dict, yaml_file_name, output_path):
     mdFile.new_paragraph()
     mdFile.write("Columns displayed in dataset table:")
     mdFile.new_list(column_names)
+    mdFile.write("\n")
+    mdFile.write("---")
     mdFile.create_md_file()
 
     clean_up_md_whitespace(str(output_path.joinpath(new_file_name)))
