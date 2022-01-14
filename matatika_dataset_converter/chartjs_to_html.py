@@ -48,7 +48,7 @@ def create_md_snippet(dataset_dict, file_name, output_dir_path):
     include_snippet_string = create_html_chart_include_string(
         file_name, dataset_dict["source"]
     )
-    mdFile.write(include_snippet_string)
+    mdFile.write(include_snippet_string, wrap_width=1000)
     mdFile.new_paragraph()
     mdFile.write("---")
     mdFile.create_md_file()
