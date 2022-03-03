@@ -40,7 +40,7 @@ def convert_all(dataset_dir_path, rawdata_dir_path, output_dir_path):
             if not visualisation:
                 click.secho(f"Did not convert {yaml_file_name}", fg="red")
                 continue
-            elif "google" in visualisation:
+            elif "google" or "html-table" in visualisation:
                 convert_google_table_dataset(
                     dataset_dict, yaml_file_name, output_dir_path
                 )
